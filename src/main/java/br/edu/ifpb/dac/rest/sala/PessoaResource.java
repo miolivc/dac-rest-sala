@@ -78,8 +78,10 @@ public class PessoaResource {
     }
     
     @DELETE
+    @Path("{cpf}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response remover(Pessoa pessoa) {
+    public Response remover(@PathParam("cpf") String cpf) {
+        Pessoa pessoa = manager.find(Pessoa.class, cpf);
         manager.remove(pessoa);
         return Response.ok().entity(pessoa).build();
     }
